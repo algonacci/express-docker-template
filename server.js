@@ -12,5 +12,5 @@ app.listen(PORT, () => {
 });
 
 app.get("/", (req, res) => {
-  res.json({ message: "Success", status_code: 200 });
+  res.status(200).json({ message: "Success", status_code: 200 });
 });

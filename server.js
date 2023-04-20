@@ -1,16 +1,18 @@
-const express = require("express");
-const cors = require("cors");
-
-app = express();
-app.use(cors());
-app.use(express.json());
-
+require("dotenv").config();
+const http = require("http");
+const app = require("./app");
 const PORT = process.env.PORT || 8000;
 
-app.listen(PORT, () => {
-  console.log(`🚀 [SERVER] is running on port http://localhost:${PORT}`);
-});
+const server = http.createServer(app);
 
-app.get("/", (req, res) => {
-  res.status(200).json({ message: "Success", status_code: 200 });
-});
+const start = async () => {
+  try {
+    server.listen(PORT, () => {
+      console.log(`🚀 [SERVER] is running on port http://localhost:${PORT}`);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+start();

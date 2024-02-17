@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
-const { helloIndex } = require("./index.controller");
+const index = require("./index.controller");
 
-router.route("/").get(helloIndex);
+router.route("/").get(index.helloIndex);
+router.route("/").post(index.helloPost);
 
 module.exports = router;

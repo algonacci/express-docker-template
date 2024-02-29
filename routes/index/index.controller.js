@@ -1,30 +1,36 @@
 const { forExample } = require("../../helpers/forExample");
+const response = require("./../../helpers/response")
 
 const helloIndex = (req, res) => {
   forExample();
-  res.status(200).json({
-    status: {
-      code: 200,
-      message: "Success fetching the API!",
-    },
-    data: null,
-  });
+
+  response.res200("Success fetching the API!", null, res)
 };
 
 const helloPost = (req, res) => {
   const inputData = req.body;
   console.log(inputData);
   if (Object.keys(inputData).length !== 0) {
-    res.status(200).json(inputData);
+    response.res201("Success create data", inputData, res)
   } else {
-    res.status(400).json({
-      status: {
-        code: 400,
-        message: "Client side error",
-      },
-      data: null,
-    });
+    response.res400(res)
   }
 };
 
-module.exports = { helloIndex, helloPost };
+
+const getData = async (req, res) => {
+  try {
+    let result
+    await fetch('https://jsonplaceholder.typicode.com/comments')
+      .then(response => response.json())
+      .then(json => { result = { json }; console.log({ json }) })
+
+    response.resCustom(200, "Success fetching data", result, res)
+
+  } catch (error) {
+    console.log(error.message)
+    response.res500(res)
+  }
+};
+
+module.exports = { helloIndex, helloPost, getData };

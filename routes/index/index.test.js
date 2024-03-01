@@ -21,7 +21,13 @@ describe("Test POST /", () => {
     const inputData = { message: "Hello World!" };
     const response = await request(app).post("/").send(inputData).set("Accept", "application/json");
     expect(response.status).toBe(200);
-    expect(response.body).toEqual(inputData);
+    expect(response.body).toEqual({
+      status: {
+        code: 201,
+        message: "Success create data",
+      },
+      data: inputData,
+  });
   });
 
   test("It should respond with 400 error when no input data provided", async () => {
@@ -30,7 +36,7 @@ describe("Test POST /", () => {
     expect(response.body).toEqual({
       status: {
         code: 400,
-        message: "Client side error",
+        message: "Client side error!",
       },
       data: null,
     });

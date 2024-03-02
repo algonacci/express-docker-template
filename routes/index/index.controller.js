@@ -20,10 +20,7 @@ const helloPost = (req, res) => {
 
 const getData = async (req, res) => {
   try {
-    let result
-    await fetch('https://jsonplaceholder.typicode.com/comments')
-      .then(response => response.json())
-      .then(json => { result = { json }; console.log({ json }) })
+    let result = 'Testing '.repeat(10000)
 
     response.resCustom(200, "Success fetching data", result, res)
 

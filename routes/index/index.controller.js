@@ -23,7 +23,7 @@ const getData = async (req, res) => {
     let result
     await fetch('https://jsonplaceholder.typicode.com/comments')
       .then(response => response.json())
-      .then(json => { result = { json }; console.log({ json }) })
+      .then(json => { result = { json };})
 
     response.resCustom(200, "Success fetching data", result, res)
 

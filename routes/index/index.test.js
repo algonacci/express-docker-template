@@ -2,9 +2,10 @@ const { response } = require("express");
 const request = require("supertest");
 const app = require("../../app");
 
+const token = 'Ceritanya Token JWT';
+
 describe("Test GET /", () => {
   test("It should respond with 200 success", async () => {
-    const token = 'Ceritanya Token JWT'
     const response = await request(app).get("/")
     .set("Authorization", `Bearer ${token}`)
     .expect("Content-Type", /json/);
@@ -22,7 +23,6 @@ describe("Test GET /", () => {
 
 describe("Test POST /", () => {
   test("It should respond with 200 success", async () => {
-    const token = 'Ceritanya Token JWT'
     const inputData = { message: "Hello World!" };
     const response = await request(app).post("/").send(inputData).set("Accept", "application/json").set("Authorization", `Bearer ${token}`);
     expect(response.status).toBe(201);
@@ -32,11 +32,10 @@ describe("Test POST /", () => {
         message: "Success create data",
       },
       data: inputData,
-  });
+    });
   });
 
   test("It should respond with 400 error when no input data provided", async () => {
-    const token = 'Ceritanya Token JWT'
     const response = await request(app).post("/").set("accept", "application/json").set("Authorization", `Bearer ${token}`);
     expect(response.status).toBe(400);
     expect(response.body).toEqual({
@@ -63,7 +62,6 @@ describe("Test POST /", () => {
 
 describe("Test GET /test", () => {
   test("It should respond with 200 success", async () => {
-    const token = 'Ceritanya Token JWT'
     const response = await request(app).get("/test")
     .set("Authorization", `Bearer ${token}`)
     .expect("Content-Type", /json/);

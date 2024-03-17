@@ -1,0 +1,55 @@
+openapi: '3.0.2'
+
+info:
+  title: API Documentation
+  description: Optional multiline or single-line description in [CommonMark](http://commonmark.org/help/) or HTML.
+  version: '1.0.0'
+
+servers:
+  - url: "http://localhost:8080"
+    description: Optional server description, e.g. Main (development) server
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - bearerAuth: []
+
+paths:
+  /:
+    get:
+      summary: Returns a list of users.
+      description: Optional extended description in CommonMark or HTML.
+      tags: 
+        - 'Index'
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Response success for index routes.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    properties:
+                      code:
+                        type: integer
+                        format: int64
+                        example: 200
+                      message:
+                        type: string
+                        example: "Success fetching the API!"
+                  data:
+                    type: string
+                    example: null
+        '401':
+          description: Unauthorized user.
+        default:
+          description: Unexpected error

@@ -1,5 +1,5 @@
 const { forExample } = require("../../helpers/forExample");
-const response = require("./../../helpers/response")
+const response = require("./../../helpers/response");
 
 const helloIndex = (req, res) => {
   forExample();
@@ -16,7 +16,6 @@ const helloPost = (req, res) => {
     response.res400(res)
   }
 };
-
 
 const getData = async (req, res) => {
   try {
